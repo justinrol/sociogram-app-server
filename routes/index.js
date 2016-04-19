@@ -94,7 +94,7 @@ router.get('/userstats/:username/:attribute',function(req,res){
 	get_request(`/userstats/${user}/${att}`)
 });
 
-router.get('/contribute',function (req,res){
+router.post('/contribute',function (req,res){
 	
 	var dummy_data = {
 		user_from : 'x',
@@ -102,12 +102,13 @@ router.get('/contribute',function (req,res){
 		att : 'honest',
 		quantity : 0.9
 	};
-
 	dummy_data = JSON.stringify(dummy_data);
-	post_request('/contribute',dummy_data,res);
+	
+	req.body = JSON.stringify(req.body);
+	post_request('/contribute',req.body,res);
 });
 
-router.get('/signup',function(req,res) {
+router.post('/signup',function(req,res) {
 
 	var dummy_data = {
 		username : "JustinRol",
@@ -118,12 +119,15 @@ router.get('/signup',function(req,res) {
 		age : 100
 	};
 	dummy_data = JSON.stringify(dummy_data);
-	post_request('/signup',dummy_data,res);
+
+	req.body = JSON.stringify(req.body);
+	post_request('/signup',req.body,res);
 
 });
 
 router.post('/post',function(req,res){
 	console.log(new Date());
+
 	var dummy_data = {
 		date : new Date(), 
 		author : "Someone Fabulous",
@@ -133,20 +137,26 @@ router.post('/post',function(req,res){
 		agree : 10,
 		disagree : 20
 	};
+
+	req.body = JSON.stringify(req.body);
 	dummy_data = JSON.stringify(dummy_data);
-	post_request('/post',dummy_data,res);
+	post_request('/post',req.body,res);
 })
 
 router.post('/post-from',function(req,res){
 	var dummy_data = {author : "Someone Fabulous"};
 	dummy_data = JSON.stringify(dummy_data);
-	post_request('/post-from',dummy_data,res);
+
+	req.body = JSON.stringify(req.body);
+	post_request('/post-from',req.body,res);
 })
 
 router.post('/post-to',function(req,res){
 	var dummy_data = {recipient : "Receiver"};
 	dummy_data = JSON.stringify(dummy_data);
-	post_request('/post-to',dummy_data,res);
+
+	req.body = JSON.stringify(req.body);
+	post_request('/post-to',req.body,res);
 })
 
 function get_mean(arr){
