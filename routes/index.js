@@ -122,7 +122,7 @@ router.get('/signup',function(req,res) {
 
 });
 
-router.get('/post',function(req,res){
+router.post('/post',function(req,res){
 	console.log(new Date());
 	var dummy_data = {
 		date : new Date(), 
@@ -137,13 +137,13 @@ router.get('/post',function(req,res){
 	post_request('/post',dummy_data,res);
 })
 
-router.get('/post-from',function(req,res){
+router.post('/post-from',function(req,res){
 	var dummy_data = {author : "Someone Fabulous"};
 	dummy_data = JSON.stringify(dummy_data);
 	post_request('/post-from',dummy_data,res);
 })
 
-router.get('/post-to',function(req,res){
+router.post('/post-to',function(req,res){
 	var dummy_data = {recipient : "Receiver"};
 	dummy_data = JSON.stringify(dummy_data);
 	post_request('/post-to',dummy_data,res);
