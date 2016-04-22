@@ -189,7 +189,8 @@ router.get('/listfn',function(req,res){
 	"post-to" : 'body, name of recipient',
 	"login" : 'not yet implemented'
 	}
-	res.json(resJson);
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(resJson, null, 3));
 })
 
 function get_mean(arr){
