@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var http = require ('http');
 
-var server_add = '139.59.162.2';
+// var server_add = '139.59.162.2'';
+var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Descent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
@@ -53,7 +54,8 @@ var post_request = function(option_path,data,res){
 					})
 					.on('end',function(){
 						str = JSON.parse(str);
-						return res.status(200).json(str);
+
+						return res.json(str);
 					})
 				})
 				.on('error',function(err){
@@ -70,8 +72,8 @@ router.get('/getuserlist/:user', function(req, res) {
 });
 
 router.get('/getuserdetail/:user',function (req, res){
-	var userser = req.params.user;
-	get_request(`/getuserlist/${user}`,res);
+	var user = req.params.user;
+	get_request(`/getuserdetail/${user}`,res);
 });
 
 router.get('/getfriendlist/:user', function(req, res) {
@@ -159,6 +161,37 @@ router.post('/post-to',function(req,res){
 	post_request('/post-to',req.body,res);
 })
 
+router.get('/login',function(req,res){
+	var dummy_data = {
+		username : 'Steezy',
+		password : 'Hello'
+	}
+	dummy_data = JSON.stringify(dummy_data);
+	if(identify('/login',dummy_data,res)){
+		console.log("login true");
+	} else {
+		console.log("login false");
+		
+	}
+})
+
+router.get('/listfn',function(req,res){
+	var  resJson = {
+	"getuserlist" : "user",
+	"getuserdetail" : "user",
+	"getfriendlist" : "user",
+	"getstats" : "attribute name. for list of attribute, use /getattributelist",
+	"userstats" : "/userstats/(username)/(attribute)",
+	"contribute" : "in the body, need : user_from, user_to, att, quantity",
+	"signup" : "in the body, need : username, name, password, email, gender, age",
+	"post" : `in the body, need : Date(Format: ${new Date()}), author, recipient,content, is_private(true or false), agree,disagree(default will be 0)`,
+	"post-from" : 'body, name of author',
+	"post-to" : 'body, name of recipient',
+	"login" : 'not yet implemented'
+	}
+	res.json(resJson);
+})
+
 function get_mean(arr){
 	var sum = 0;
 	console.log(arr);
@@ -181,6 +214,30 @@ function get_variance(arr){
 		}
 	}
 	return (sum / arr.length).toFixed(3);
+}
+
+var identify = function(option_path,data,res){
+	var str = '';
+	var options = post_options;
+	options.path = option_path;
+
+	var post_req =http.request(options,function(resp){
+					resp
+					.on('data',function(chunk){
+						str += chunk;
+					})
+					.on('end',function(){
+						str = JSON.parse(str);
+						console.log(str.success);
+						return str.success
+					})
+				})
+				.on('error',function(err){
+					return res.status(500).json({success:false,data:err});
+				})
+
+		post_req.write(data);
+		post_req.end()
 }
 
 module.exports = router;
