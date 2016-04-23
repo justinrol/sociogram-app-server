@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var http = require ('http');
 
-var server_add = '139.59.162.2'';
+var server_add = '139.59.162.2';
 // var server_add = 'localhost'
 var server_port = 3000;
 
