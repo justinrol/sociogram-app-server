@@ -6,7 +6,7 @@ var http = require ('http');
 var server_add = 'localhost'
 var server_port = 3000;
 
-var attribute_list = ["Extraversion","Honest","Descent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
+var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
 
 var get_options = {
 	host : server_add,
@@ -167,12 +167,7 @@ router.get('/login',function(req,res){
 		password : 'Hello'
 	}
 	dummy_data = JSON.stringify(dummy_data);
-	if(identify('/login',dummy_data,res)){
-		console.log("login true");
-	} else {
-		console.log("login false");
-		
-	}
+	identify('/login',dummy_data,res);
 })
 
 router.get('/listfn',function(req,res){
@@ -230,11 +225,17 @@ var identify = function(option_path,data,res){
 					.on('end',function(){
 						str = JSON.parse(str);
 						console.log(str.success);
-						return str.success
+						if(!!str.success){
+
+						} else {
+
+						}
+						console.log("response: "+res);
+						res.json(str.success);
 					})
 				})
 				.on('error',function(err){
-					return res.status(500).json({success:false,data:err});
+					res.status(500).json({success:false,data:err});
 				})
 
 		post_req.write(data);
