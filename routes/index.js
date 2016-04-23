@@ -161,13 +161,15 @@ router.post('/post-to',function(req,res){
 	post_request('/post-to',req.body,res);
 })
 
-router.get('/login',function(req,res){
+router.post('/login',function(req,res){
 	var dummy_data = {
 		username : 'Steezy',
 		password : 'Hello'
 	}
 	dummy_data = JSON.stringify(dummy_data);
-	identify('/login',dummy_data,res);
+
+	req.body = JSON.stringify(req.body);
+	identify('/login',req.body,res);
 })
 
 router.get('/listfn',function(req,res){
@@ -182,7 +184,7 @@ router.get('/listfn',function(req,res){
 	"post" : `in the body, need : Date(Format: ${new Date()}), author, recipient,content, is_private(true or false), agree,disagree(default will be 0)`,
 	"post-from" : 'body, name of author',
 	"post-to" : 'body, name of recipient',
-	"login" : 'not yet implemented'
+	"login" : 'body, username and password'
 	}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
