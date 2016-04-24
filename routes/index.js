@@ -26,27 +26,34 @@ var get_request = function(option_path,res){
 	var str = '';
 	var options = get_options;
 	options.path = option_path;
-	
 	http.request(options,function(resp){
 		resp
 		.on('error',function(err){
+			console.log(err);
 			return res.status(500).json({success:false,data:err});
 		})
 		.on('data',function(chunk){
 			str += chunk;
 		})
 		.on('end',function(){
-			str = JSON.parse(str);
-			return res.json(str);
-		});	
+			console.log(str);
+			console.log(str.length);
+			if(str.length<=2){
+				str = JSON.parse(str);
+				res.json(JSON.parse(str));
+			} else {
+				res.json({success:false,data:"is empty",response:str});
+			}
+		});;	
 	}).end();
 };
 
 var post_request = function(option_path,data,res){
 	var str = '';
 	var options = post_options;
-	options.path = option_path;
-
+	console.log(data);
+	options.path = option_path;	
+		console.log(options);
 	var post_req =http.request(options,function(resp){
 					resp
 					.on('data',function(chunk){
@@ -121,6 +128,8 @@ router.post('/signup',function(req,res) {
 		age : 100
 	};
 	dummy_data = JSON.stringify(dummy_data);
+
+	console.log(req.body);
 
 	req.body = JSON.stringify(req.body);
 	post_request('/signup',req.body,res);
