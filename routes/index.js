@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var http = require ('http');
 
-// var server_add = '139.59.162.2';
-var server_add = 'localhost'
+var server_add = '139.59.162.2';
+// var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
@@ -29,10 +29,7 @@ var get_request = function(option_path,res){
 	console.log("checkpoint 1");
 	http.request(options,function(resp){
 		resp
-		.on('error',function(err){
-			console.log(err);
-			return res.status(500).json({success:false,data:err});
-		})
+
 		.on('data',function(chunk){
 			str += chunk;
 		})
@@ -40,6 +37,10 @@ var get_request = function(option_path,res){
 			str = JSON.parse(str);
 			res.json(str);
 		});
+		.on('error',function(err){
+			console.log(err);
+			return res.status(500).json({success:false,data:err});
+		})
 	}).end();
 };
 
@@ -59,7 +60,11 @@ var post_request = function(option_path,data,res){
 						str = JSON.parse(str);
 						console.log("string 2:" + str);
 						return res.json(str);
-					});
+					})
+					.on('error',function(err){
+						console.log(err);
+						return res.status(500).json({success:false,data:str});
+					})
 				})
 				.on('error',function(err){
 					return res.status(500).json({success:false,data:err});
