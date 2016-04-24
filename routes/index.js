@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 var http = require ('http');
 
-var server_add = '139.59.162.2';
-// var server_add = 'localhost'
+// var server_add = '139.59.162.2';
+var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
 
 var get_options = {
 	host : server_add,
-	port : server_port,
+	port : server_port
 };
 
 var post_options = {
@@ -26,6 +26,7 @@ var get_request = function(option_path,res){
 	var str = '';
 	var options = get_options;
 	options.path = option_path;
+	console.log("checkpoint 1");
 	http.request(options,function(resp){
 		resp
 		.on('error',function(err){
@@ -36,15 +37,9 @@ var get_request = function(option_path,res){
 			str += chunk;
 		})
 		.on('end',function(){
-			console.log(str);
-			console.log(str.length);
-			if(str.length<=2){
-				str = JSON.parse(str);
-				res.json(JSON.parse(str));
-			} else {
-				res.json({success:false,data:"is empty",response:str});
-			}
-		});;	
+			str = JSON.parse(str);
+			res.json(str);
+		});
 	}).end();
 };
 
@@ -60,14 +55,15 @@ var post_request = function(option_path,data,res){
 						str += chunk;
 					})
 					.on('end',function(){
+						console.log(str);
 						str = JSON.parse(str);
-
+						console.log("string 2:" + str);
 						return res.json(str);
-					})
+					});
 				})
 				.on('error',function(err){
 					return res.status(500).json({success:false,data:err});
-				})
+				});
 
 		post_req.write(data);
 		post_req.end()
@@ -100,7 +96,7 @@ router.get('/getattributelist',function(req,res){
 router.get('/userstats/:username/:attribute',function(req,res){
 	var user = req.params.username;
 	var att = req.params.attribute;
-	get_request(`/userstats/${user}/${att}`)
+	get_request(`/userstats/${user}/${att}`,res)
 });
 
 router.post('/contribute',function (req,res){
