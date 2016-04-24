@@ -36,7 +36,7 @@ var get_request = function(option_path,res){
 		.on('end',function(){
 			str = JSON.parse(str);
 			res.json(str);
-		});
+		})
 		.on('error',function(err){
 			console.log(err);
 			return res.status(500).json({success:false,data:err});
@@ -52,6 +52,10 @@ var post_request = function(option_path,data,res){
 		console.log(options);
 	var post_req =http.request(options,function(resp){
 					resp
+					.on('error',function(err){
+						console.log(err);
+						return res.status(500).json({success:false,data:str});
+					})
 					.on('data',function(chunk){
 						str += chunk;
 					})
@@ -61,10 +65,7 @@ var post_request = function(option_path,data,res){
 						console.log("string 2:" + str);
 						return res.json(str);
 					})
-					.on('error',function(err){
-						console.log(err);
-						return res.status(500).json({success:false,data:str});
-					})
+
 				})
 				.on('error',function(err){
 					return res.status(500).json({success:false,data:err});
