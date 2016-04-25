@@ -156,12 +156,12 @@ router.post('/post',function(req,res){
 	post_request('/post',req.body,res);
 })
 
-router.post('/post-from',function(req,res){
-	var dummy_data = {author : "Someone Fabulous"};
+router.post('/friend-post',function(req,res){
+	var dummy_data = {recipient : "Someone"};
 	dummy_data = JSON.stringify(dummy_data);
 
 	req.body = JSON.stringify(req.body);
-	post_request('/post-from',req.body,res);
+	post_request('/followerpost',req.body,res);
 })
 
 router.post('/post-to',function(req,res){
