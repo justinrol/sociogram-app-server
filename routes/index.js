@@ -187,13 +187,13 @@ router.get('/listfn',function(req,res){
 	var  resJson = {
 	"getuserlist" : "user",
 	"getuserdetail" : "user",
-	"getfriendlist" : "user",
+	"getfriendlist" : "user, this will show the people who were granted permission to view user's posts",
 	"getstats" : "attribute name. for list of attribute, use /getattributelist",
 	"userstats" : "/userstats/(username)/(attribute)",
 	"contribute" : "in the body, need : user_from, user_to, att, quantity",
 	"signup" : "in the body, need : username, name, password, email, gender, age",
 	"post" : `in the body, need : Date(Format: ${new Date()}), author, recipient,content, is_private(true or false), agree,disagree(default will be 0)`,
-	"post-from" : 'body, name of author',
+	"friend-post" : 'body, username. This will show the posts that the user can see, sorted by date.',
 	"post-to" : 'body, name of recipient',
 	"login" : 'body, username and password'
 	}
