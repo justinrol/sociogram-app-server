@@ -81,7 +81,7 @@ var post_request = function(option_path,data,res){
 						return res.status(500).json({success:false,data:str});
 					})
 					.on('data',function(chunk){
-						str += chunk;
+						str += JSON.parse(chunk);
 					})
 					.on('end',function(){
 						console.log(str);
