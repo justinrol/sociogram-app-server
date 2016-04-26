@@ -1,0 +1,7 @@
+::1 - - [26/Apr/2016:19:29:10 +0000] "GET / HTTP/1.1" 404 1255 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:29:11 +0000] "GET /stylesheets/style.css HTTP/1.1" 200 111 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:29:11 +0000] "GET /favicon.ico HTTP/1.1" 404 1255 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:29:13 +0000] "GET /listfn HTTP/1.1" 200 978 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:29:16 +0000] "GET /getuserdetail/Steezy HTTP/1.1" 200 60 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:32:20 +0000] "GET /post HTTP/1.1" 200 2 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+::1 - - [26/Apr/2016:19:35:09 +0000] "GET /post-to HTTP/1.1" 200 33 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"

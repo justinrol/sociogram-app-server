@@ -3,6 +3,7 @@ var router = express.Router();
 var http = require ('http');
 var fs = require('fs');
 
+
 var server_add = '139.59.162.2';
 // var server_add = 'localhost'
 var server_port = 3000;
@@ -58,7 +59,6 @@ var get_request = function(option_path,res){
 			str += chunk;
 		})
 		.on('end',function(){
-			str = JSON.parse(str);
 			res.json(str);
 		})
 		.on('error',function(err){
@@ -84,9 +84,6 @@ var post_request = function(option_path,data,res){
 						str += JSON.parse(chunk);
 					})
 					.on('end',function(){
-						console.log(str);
-						str = JSON.parse(str);
-						console.log("string 2:" + str);
 						return res.json(str);
 					})
 
@@ -98,6 +95,10 @@ var post_request = function(option_path,data,res){
 		post_req.write(data);
 		post_req.end()
 }
+
+router.get('/',function(req,res){
+	get_request('/',res);
+});
 
 router.get('/getuserlist/:user', function(req, res) {
 	var user = req.params.user;
@@ -120,7 +121,7 @@ router.get('/getstats/:attribute',function(req,res){
 });
 
 router.get('/getattributelist',function(req,res){
-	return res.json(attribute_list);
+	res.json(attribute_list);
 });
 
 router.get('/userstats/:username/:attribute',function(req,res){
@@ -167,8 +168,8 @@ router.post('/post',function(req,res){
 
 	var dummy_data = {
 		date : new Date(), 
-		author : "Someone Fabulous",
-		recipient : "Receiver",
+		author : "Someone",
+		recipient : "Jzzy",
 		content : "Lecture about life",
 		is_private : false,
 		agree : 10,
@@ -221,8 +222,8 @@ router.get('/listfn',function(req,res){
 	"post-to" : 'body, name of recipient',
 	"login" : 'body, username and password',
 	"Here are image-related" : '',
-	"get request to '/profile-photo' with 'username' param will send the photo back.",
-	"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
+	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
+	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
 	}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));

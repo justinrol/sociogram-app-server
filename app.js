@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -8,17 +7,11 @@ var session = require('express-session');
 var fs = require('fs');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('combined',{stream: accessLogStream}));
 app.use(bodyParser.json());
@@ -30,7 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'somerandomstring'}))
 
 app.use(function(req,res,next){
-  console.log(req.session);
+  console.log("Requested URL: " + req.url);
+  console.log("Request Body: " + req.body);
   next();
 })
 
