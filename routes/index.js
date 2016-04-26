@@ -4,8 +4,8 @@ var http = require ('http');
 var fs = require('fs');
 
 
-var server_add = '139.59.162.2';
-// var server_add = 'localhost'
+// var server_add = '139.59.162.2';
+var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
@@ -180,22 +180,30 @@ router.post('/post',function(req,res){
 	req.body = JSON.stringify(req.body);
 	dummy_data = JSON.stringify(dummy_data);
 	post_request('/post',req.body,res);
-})
+});;
 
 router.post('/friendpost',function(req,res){
-	var dummy_data = {recipient : "Someone"};
+	var dummy_data = {user : "JustinRol"};
 	dummy_data = JSON.stringify(dummy_data);
-
+	
 	req.body = JSON.stringify(req.body);
 	post_request('/friendpost',req.body,res);
 })
 
 router.post('/postto',function(req,res){
-	var dummy_data = {recipient : "Receiver"};
+	var dummy_data = {user : "Jzzy"};
 	dummy_data = JSON.stringify(dummy_data);
 
 	req.body = JSON.stringify(req.body);
 	post_request('/postto',req.body,res);
+})
+
+router.post('/comments',function(req,res){
+	var dummy_data = {user : "Jzzy"};
+	dummy_data = JSON.stringify(dummy_data);
+
+	req.body = JSON.stringify(req.body);
+	post_request('/comments',req.body,res);
 })
 
 router.post('/login',function(req,res){
