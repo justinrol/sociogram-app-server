@@ -96,11 +96,6 @@ var post_request = function(option_path,data,res){
 		post_req.write(data);
 		post_req.end()
 }
-
-router.get('/',function(req,res){
-	get_request('/',res);
-});
-
 router.get('/getuserlist/:user', function(req, res) {
 	var user = req.params.user;
 	get_request(`/getuserlist/${user}`,res);
@@ -193,6 +188,12 @@ router.post('/friendpost',function(req,res){
 router.post('/postto',function(req,res){
 	var dummy_data = {user : "Jzzy"};
 	dummy_data = JSON.stringify(dummy_data);
+
+	req.body = JSON.stringify(req.body);
+	post_request('/postto',req.body,res);
+})
+
+router.post('/test',function(req,res){
 
 	req.body = JSON.stringify(req.body);
 	post_request('/postto',req.body,res);
