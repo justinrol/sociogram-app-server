@@ -199,12 +199,17 @@ router.post('/test',function(req,res){
 	post_request('/postto',req.body,res);
 })
 
-router.post('/comments',function(req,res){
+router.post('/publicpostto',function(req,res){
 	var dummy_data = {user : "Jzzy"};
 	dummy_data = JSON.stringify(dummy_data);
 
 	req.body = JSON.stringify(req.body);
-	post_request('/comments',req.body,res);
+	post_request('/publicpostto',req.body,res);
+});
+
+router.put('/updateprivacy',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/updateprivacy',req.body,res);
 })
 
 router.post('/login',function(req,res){
