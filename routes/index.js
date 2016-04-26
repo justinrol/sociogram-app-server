@@ -1,12 +1,36 @@
 var express = require('express');
 var router = express.Router();
 var http = require ('http');
+var fs = require('fs');
 
 var server_add = '139.59.162.2';
 // var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
+
+router.get('/profile-photo',function(req,res){
+	var username = req.body.username;
+	var filepath = '/public/image/' + username;
+	res.sendFile(filepath);
+})
+
+router.post('/profile-photo',function(req,res){
+	var tmp_path = req.files.profile.path;
+	var username = req.body.username;
+	var target_path = './public/images/' + username;
+
+	fs.rename(tmp_path, target_path, function(err){
+		if(err) throw err;
+
+		fs.unlink(tmp_path,function(){
+			if(err) {
+				res.statsu(500).json({success:false,data:err});
+			}
+			res.status(200).json({success:true});
+		});
+	});
+});
 
 var get_options = {
 	host : server_add,
@@ -195,7 +219,10 @@ router.get('/listfn',function(req,res){
 	"post" : `in the body, need : Date(Format: ${new Date()}), author, recipient,content, is_private(true or false), agree,disagree(default will be 0)`,
 	"friend-post" : 'body, username. This will show the posts that the user can see, sorted by date.',
 	"post-to" : 'body, name of recipient',
-	"login" : 'body, username and password'
+	"login" : 'body, username and password',
+	"Here are image-related" : '',
+	"get request to '/profile-photo' with 'username' param will send the photo back.",
+	"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
 	}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
