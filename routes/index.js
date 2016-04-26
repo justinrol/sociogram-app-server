@@ -222,8 +222,13 @@ router.get('/listfn',function(req,res){
 	"post-to" : 'body, name of recipient',
 	"login" : 'body, username and password',
 	"Here are image-related" : '',
+<<<<<<< HEAD
 	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
 	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
+=======
+	"": "get request to '/profile-photo' with 'username' param will send the photo back.",
+	"": "post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
+>>>>>>> dfdb2bfe3ebb6f6a6727123a800278dc63690ec9
 	}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
