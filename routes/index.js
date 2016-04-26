@@ -4,8 +4,8 @@ var http = require ('http');
 var fs = require('fs');
 
 
-// var server_add = '139.59.162.2';
-var server_add = 'localhost'
+var server_add = '139.59.162.2';
+// var server_add = 'localhost'
 var server_port = 3000;
 
 var attribute_list = ["Extraversion","Honest","Decent","Charming","Generous","Kind","Confident","Flexible","Modest","Relaxed"];
