@@ -51,7 +51,6 @@ var get_request = function(option_path,res){
 	var str = '';
 	var options = get_options;
 	options.path = option_path;
-	console.log("checkpoint 1");
 	http.request(options,function(resp){
 		resp
 
@@ -59,6 +58,7 @@ var get_request = function(option_path,res){
 			str += chunk;
 		})
 		.on('end',function(){
+			str = JSON.parse(str);
 			res.json(str);
 		})
 		.on('error',function(err){
@@ -81,9 +81,10 @@ var post_request = function(option_path,data,res){
 						return res.status(500).json({success:false,data:str});
 					})
 					.on('data',function(chunk){
-						str += JSON.parse(chunk);
+						str += chunk;
 					})
 					.on('end',function(){
+						str = JSON.parse(str);
 						return res.json(str);
 					})
 
@@ -181,20 +182,20 @@ router.post('/post',function(req,res){
 	post_request('/post',req.body,res);
 })
 
-router.post('/friend-post',function(req,res){
+router.post('/friendpost',function(req,res){
 	var dummy_data = {recipient : "Someone"};
 	dummy_data = JSON.stringify(dummy_data);
 
 	req.body = JSON.stringify(req.body);
-	post_request('/followerpost',req.body,res);
+	post_request('/friendpost',req.body,res);
 })
 
-router.post('/post-to',function(req,res){
+router.post('/postto',function(req,res){
 	var dummy_data = {recipient : "Receiver"};
 	dummy_data = JSON.stringify(dummy_data);
 
 	req.body = JSON.stringify(req.body);
-	post_request('/post-to',req.body,res);
+	post_request('/postto',req.body,res);
 })
 
 router.post('/login',function(req,res){
@@ -222,13 +223,10 @@ router.get('/listfn',function(req,res){
 	"post-to" : 'body, name of recipient',
 	"login" : 'body, username and password',
 	"Here are image-related" : '',
-<<<<<<< HEAD
 	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
-	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
-=======
+	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server.",
 	"": "get request to '/profile-photo' with 'username' param will send the photo back.",
 	"": "post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
->>>>>>> dfdb2bfe3ebb6f6a6727123a800278dc63690ec9
 	}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));

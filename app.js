@@ -3,7 +3,6 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
 var fs = require('fs');
 
 var routes = require('./routes/index');
@@ -12,6 +11,8 @@ var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a
 
 var app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('combined',{stream: accessLogStream}));
 app.use(bodyParser.json());
@@ -19,17 +20,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(session({secret: 'somerandomstring'}))
-
 app.use(function(req,res,next){
-  console.log("Requested URL: " + req.url);
-  console.log("Request Body: " + req.body);
+  console.log(req.method + " @ " + req.url);
+  console.log("Request Body: ");
+	console.log(req.body);
+	console.log("\n");
   next();
 })
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
