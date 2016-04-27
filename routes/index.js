@@ -96,6 +96,14 @@ var post_request = function(option_path,data,res){
 		post_req.write(data);
 		post_req.end()
 }
+router.get('/',function(req,res){
+	res.send("Hey Sexy <3");
+})
+
+router.get('/dbserver',function(req,res){
+	get_request('/dbserver',res);
+})
+
 router.get('/getuserlist/:user', function(req, res) {
 	var user = req.params.user;
 	get_request(`/getuserlist/${user}`,res);
@@ -194,10 +202,8 @@ router.post('/postto',function(req,res){
 })
 
 router.post('/test',function(req,res){
-
-	req.body = JSON.stringify(req.body);
-	post_request('/postto',req.body,res);
-})
+	res.json(req.body);
+});
 
 router.post('/publicpostto',function(req,res){
 	var dummy_data = {user : "Jzzy"};
