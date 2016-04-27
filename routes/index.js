@@ -149,7 +149,6 @@ router.post('/contribute',function (req,res){
 });
 
 router.post('/signup',function(req,res) {
-
 	var dummy_data = {
 		username : "JustinRol",
 		name : "Kim Hyojong",
@@ -164,7 +163,6 @@ router.post('/signup',function(req,res) {
 
 	req.body = JSON.stringify(req.body);
 	post_request('/signup',req.body,res);
-
 });
 
 router.post('/post',function(req,res){
@@ -223,6 +221,11 @@ router.post('/publicpostto',function(req,res){
 	post_request('/publicpostto',req.body,res);
 });
 
+router.post('/getallfeatures',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/getallfeatures',req.body,res);
+})
+
 router.put('/updateprivacy',function(req,res){
 	req.body = JSON.stringify(req.body);
 	post_request('/updateprivacy',req.body,res);
@@ -261,7 +264,8 @@ router.get('/listfn',function(req,res){
 	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
 	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server.",
 	"addcustomfeature" : "username, feature",
-	"getcustomfeature" : "username"
+	"getcustomfeature" : "username",
+	"getallfeatures" : "username"
 }
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
