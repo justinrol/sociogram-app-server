@@ -226,6 +226,16 @@ router.post('/getallfeatures',function(req,res){
 	post_request('/getallfeatures',req.body,res);
 })
 
+router.put('/update-agree',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/update-agree',req.body,res);
+})
+
+router.put('/update-disagree',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/update-disagree',req.body,res);
+})
+
 router.put('/updateprivacy',function(req,res){
 	req.body = JSON.stringify(req.body);
 	post_request('/updateprivacy',req.body,res);
