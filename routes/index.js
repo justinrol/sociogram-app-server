@@ -212,6 +212,11 @@ router.put('/updateprivacy',function(req,res){
 	post_request('/updateprivacy',req.body,res);
 })
 
+router.post('/addfriend',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/addfriend',req.body,res);
+})
+
 router.post('/login',function(req,res){
 	var dummy_data = {
 		username : 'Steezy',
