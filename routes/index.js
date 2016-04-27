@@ -199,6 +199,16 @@ router.post('/test',function(req,res){
 	post_request('/postto',req.body,res);
 })
 
+router.post('/addcustomfeature',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/customfeature',req.body,res);
+})
+
+router.get('/getcustomfeature',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/customfeature',req.body,res);
+})
+
 router.post('/publicpostto',function(req,res){
 	var dummy_data = {user : "Jzzy"};
 	dummy_data = JSON.stringify(dummy_data);
