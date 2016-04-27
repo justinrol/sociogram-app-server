@@ -254,9 +254,9 @@ router.get('/listfn',function(req,res){
 	"Here are image-related" : '',
 	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
 	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server.",
-	"": "get request to '/profile-photo' with 'username' param will send the photo back.",
-	"": "post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
-	}
+	"addcustomfeature" : "username, feature",
+	"getcustomfeature" : "username"
+}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
 })
