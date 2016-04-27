@@ -269,7 +269,9 @@ router.get('/listfn',function(req,res){
 	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server.",
 	"addcustomfeature" : "username, feature",
 	"getcustomfeature" : "username",
-	"getallfeatures" : "username"
+	"getallfeatures" : "username",
+	"update-agree" : "id",
+	"update-disagree" : "id"
 }
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
