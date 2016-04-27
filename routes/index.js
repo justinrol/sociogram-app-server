@@ -205,6 +205,16 @@ router.post('/test',function(req,res){
 	res.json(req.body);
 });
 
+router.post('/addcustomfeature',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/customfeature',req.body,res);
+})
+
+router.get('/getcustomfeature',function(req,res){
+	req.body = JSON.stringify(req.body);
+	post_request('/customfeature',req.body,res);
+})
+
 router.post('/publicpostto',function(req,res){
 	var dummy_data = {user : "Jzzy"};
 	dummy_data = JSON.stringify(dummy_data);
@@ -250,9 +260,9 @@ router.get('/listfn',function(req,res){
 	"Here are image-related" : '',
 	"":"get request to '/profile-photo' with 'username' param will send the photo back.",
 	"":"post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server.",
-	"": "get request to '/profile-photo' with 'username' param will send the photo back.",
-	"": "post request to '/profile-photo' with 'username' param and photo whose name is 'profile' will upload the photo to the server."
-	}
+	"addcustomfeature" : "username, feature",
+	"getcustomfeature" : "username"
+}
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(resJson, null, 3));
 })
